@@ -42,7 +42,9 @@ public class TestClass {
 			
 			// Test Add Preferences:
 			
-			System.out.println(table.fillPreferencesOfAll(10));
+			table.fillPreferencesOfAll(10);
+			
+			System.out.println(table.getAllStudentEntries());
 			
 			
 			

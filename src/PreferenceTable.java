@@ -71,21 +71,31 @@ public class PreferenceTable {
 		return randomPreference;
 	}
 	
+	
 	/* Returns HashTable of Students */
 	public Hashtable<String, StudentEntry> getAllStudentEntries() {
 		return studentLookup;
 	}
 	
-	public String fillPreferencesOfAll(int maxPrefs) {
-		// Iterate over all student objects and ensure they all have ten different preferences. 
+	public void fillPreferencesOfAll(int maxPrefs) {
 		for (String key : studentLookup.keySet()) {
-			   StudentEntry student = studentLookup.get(key);
-			   int numberPreferences = student.getNumberOfStatedPreferences();
-			   if(numberPreferences != maxPrefs) {
-				   // 
+		   StudentEntry student = studentLookup.get(key);
+		   List<String> projects = new ArrayList<String>(student.getOrderedPreferences());
+		   if(projects.size() != maxPrefs) {
+			   int projectsNeeded = maxPrefs - projects.size();
+			   for(int i=0; i < projectsNeeded; i++) {
+				   for(String str: projects) {
+					   	String randomProject = getRandomPreference();
+					    if(!(str.trim().contains(randomProject))) {
+					    	student.addProject(randomProject);
+					    }
+					    else {
+					    	i--;
+					    }
+				   }
 			   }
-			}
-		return "";
+		   }
+		}
 	}
 	
 	/* Returns a StudentENtry Object for specified student */

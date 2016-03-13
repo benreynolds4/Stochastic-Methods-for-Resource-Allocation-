@@ -7,7 +7,6 @@ import java.util.*;
 public class PreferenceTable {
 	
 	private Random random = new Random();
-	
 	private	Hashtable<String, StudentEntry> studentLookup =	new	Hashtable();
 
 	public PreferenceTable() {
@@ -18,8 +17,7 @@ public class PreferenceTable {
 		// Vector<Vector> allData = loadContentFromFile(fileName);
 		// System.out.println(allData);
 	}
-	
-	
+
 	/* Gets vector from LoadContentsFromFile and Creates StudentEntry for each Student */
 	public void setupStudents() throws IOException {
 		Vector<Vector> students = loadContentFromFile("tabfile.txt");
@@ -82,18 +80,17 @@ public class PreferenceTable {
 		   StudentEntry student = studentLookup.get(key);
 		   List<String> projects = new ArrayList<String>(student.getOrderedPreferences());
 		   if(projects.size() != maxPrefs) {
-			   int projectsNeeded = maxPrefs - projects.size();
-			   for(int i=0; i < projectsNeeded; i++) {
-				   for(String str: projects) {
+			   if(!student.hasPreAssignedProject()) {
+				   int projectsNeeded = maxPrefs - projects.size();
+				   int i = 0;
+				   while( i < projectsNeeded) {
 					   	String randomProject = getRandomPreference();
-					    if(!(str.trim().contains(randomProject))) {
+					    if(!(projects.contains(randomProject))) {
 					    	student.addProject(randomProject);
-					    }
-					    else {
-					    	i--;
+					    	i++;
 					    }
 				   }
-			   }
+			   } 
 		   }
 		}
 	}
@@ -124,10 +121,3 @@ public class PreferenceTable {
 		return allData;		
 	}
 }
-
-
-
-
-
-
-

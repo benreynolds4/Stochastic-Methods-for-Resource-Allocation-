@@ -63,4 +63,12 @@ public class StudentEntry {
 			}
 		return bool;
 	}
+	
+	public int getRanking(String inputProject) {
+		int count = 0;
+		if(projects.contains(inputProject)) {
+			count = projects.indexOf(inputProject);
+		} else { count = -1; }
+		return count;
+	}
 }

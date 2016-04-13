@@ -76,6 +76,72 @@ public class TestClass {
 			System.out.println(best.getEnergy());
 			System.out.println(best.getFitness());
 			best.printPreferences();
+			
+			
+			
+			/*Conors Simulated Annealing
+			System.out.println("\n\nSimulated Annealing");
+			double temp = 10000;
+	        double coolingRate = 0.00001;
+	        CandidateSolution Solution = new CandidateSolution(table);
+	        int currentSolution = Solution.getEnergy() ;
+	        int currentFitness = 0;
+	        
+	        for(int i =0; i< 30; i++) {
+	        	temp = 10000;
+	        	while (temp > 1) {
+		        	CandidateSolution newSolution = new CandidateSolution(table);
+		        	
+		        	if (newSolution.getEnergy() < currentSolution){
+		        		currentSolution = newSolution.getEnergy() ;
+		        		currentFitness = newSolution.getFitness();
+		        	}
+		        	temp *= 1-coolingRate;
+		        }
+	        	System.out.println("The best solution is: " + currentSolution) ;
+		        System.out.println("Best Fitness: " + currentFitness);
+	        } */
+			
+			System.out.println("Projects List:");
+			System.out.println(table.getProjects());
+			
+			helperMethods help = new helperMethods();
+			// Cooling rate
+			double temp = 10000;
+	        double coolingRate = 0.00003;
+	        CandidateSolution currentSolution = new CandidateSolution(table); // Initialize intial solution
+	        System.out.println("Initial solution distance: " + currentSolution.getEnergy());
+	        int  bestEnergy = currentSolution.getEnergy();// Set as current best
+	        
+	        // Loop until system has cooled
+	        while (temp > 1) {
+	            // Create new neighbour tour
+	        	CandidateSolution newSolution = new CandidateSolution(table);
+	            
+	            // Get energy of solutions
+	            int currentEnergy = currentSolution.getEnergy();
+	            int neighbourEnergy = newSolution.getEnergy();
+
+	            // Decide if we should accept the neighbour
+	            if (help.acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
+	            	currentSolution = newSolution;
+	            }
+
+	            // Keep track of the best solution found
+	            if (currentSolution.getEnergy() < bestEnergy) {
+	                bestEnergy = currentSolution.getEnergy();
+	            }
+	            // Cool system
+	            
+	            temp *= 1-coolingRate;
+	        }
+
+	        System.out.println("Final solution Energy: " + bestEnergy);
+			
+			
+			
+			
+			
 		}
 	}
 

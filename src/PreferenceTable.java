@@ -8,6 +8,8 @@ public class PreferenceTable {
 	
 	private Random random = new Random();
 	private	Hashtable<String, StudentEntry> studentLookup =	new	Hashtable();
+	public static ArrayList projects = new ArrayList();
+	public static ArrayList preassignedProjects = new ArrayList();
 
 	public PreferenceTable() {
 		
@@ -100,6 +102,16 @@ public class PreferenceTable {
 		return studentLookup.get(sname);
 	}
 	
+	public ArrayList<String> getProjects(){
+		System.out.println("Projects size:" + projects.size());
+		return projects;
+	}
+	
+	public ArrayList<String> getPreassignedProjects(){
+		System.out.println("Preassigned Size:" +preassignedProjects.size());
+		return preassignedProjects;
+	}
+	
 	/* This method loads students from TSV file into a Vector of Vectors */
 	private static Vector<Vector> loadContentFromFile(String fileName) throws IOException {
 		FileInputStream	stream	= new FileInputStream(fileName);							// Read File.
@@ -112,6 +124,19 @@ public class PreferenceTable {
 			if(count != 0) {
 				String[] splitLine = line.split("\t");
 				Vector<String> lineVector = new Vector<String>(Arrays.asList(splitLine));
+				if(!lineVector.elementAt(1).equals("Yes")) {
+					for(String element : lineVector){
+						if((element != lineVector.elementAt(0))) {
+							if(element != lineVector.elementAt(1)){
+								if(!(projects.contains(element))) {
+									projects.add(element);
+								}
+							}
+						}
+					}
+				} else if(lineVector.elementAt(1).equals("Yes")) {
+					preassignedProjects.add(lineVector.elementAt(2));
+				}
 				allData.add(lineVector);
 			}
 			count++;

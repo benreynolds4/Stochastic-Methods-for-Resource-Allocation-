@@ -4,9 +4,13 @@ public class CandidateSolution {
 	private PreferenceTable table; 
 	private Hashtable<StudentEntry, CandidateAssignment> assignments = new Hashtable<StudentEntry, CandidateAssignment>();
 	static final int standardPenalty = 1000;
+	Projects projects;
+	
 	
 	public CandidateSolution(PreferenceTable prefs) {
 		table = prefs;
+		projects = new Projects(table.getProjects(), table.getPreassignedProjects());
+		
 		createCandidateAssignments();
 	}
 	
@@ -16,7 +20,7 @@ public class CandidateSolution {
 	    StudentEntry entry; 
 	    while(e.hasMoreElements()) {
 	    	entry = e.nextElement();
-	    	CandidateAssignment assignment = new CandidateAssignment(entry);
+	    	CandidateAssignment assignment = new CandidateAssignment(entry, projects);
 	    	assignments.put(entry, assignment);
 	    } 
 	}
@@ -72,6 +76,8 @@ public class CandidateSolution {
 		return totalPenalties;
 	}
 	
+
+	
 	public void printPreferences() {
 		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth;
 	    first = second  = third = fourth = fifth = sixth = seventh = eighth = ninth = tenth =0;
@@ -94,4 +100,6 @@ public class CandidateSolution {
 		}
 		System.out.println("first Preferences awarded: " + first + "\nSecond Preferences awarded: " + second + "\nThird Preferences awarded: " + third + "\nFourth Preferences awarded: " + fourth + "\nFifth Preferences awarded: " + fifth + "\nSixth Preferences awarded: " + sixth + "\nSeventh Preferences awarded: " + seventh + "\nEight Preferences awarded: " + eighth + "\nNinth Preferences awarded: " + ninth + "\nTenth Preferences awarded: " + tenth);
 	}
+	
+
 }

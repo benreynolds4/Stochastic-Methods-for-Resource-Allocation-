@@ -66,6 +66,9 @@ public class TestClass {
 			CandidateSolution cs = new CandidateSolution(table);
 			cs.printSolution();
 			System.out.println(cs.getEnergy());
+			cs.removeCollisons();
+			System.out.println(cs.getEnergy());
+			
 			
 			//CandidateSolution cs2 = new CandidateSolution(table);
 			//cs2.printSolution();
@@ -92,7 +95,7 @@ public class TestClass {
 	        int currentSolution = Solution.getEnergy() ;
 	        int currentFitness = 0;
 	        
-	        for(int i =0; i< 30; i++) {
+	       // for(int i =0; i< 30; i++) {
 	        	temp = 10000;
 	        	while (temp > 1) {
 		        	CandidateSolution newSolution = new CandidateSolution(table);
@@ -105,11 +108,11 @@ public class TestClass {
 		        }
 	        	System.out.println("The best solution is: " + currentSolution) ;
 		        System.out.println("Best Fitness: " + currentFitness);
-	        } 
+	        //} 
 			
-			System.out.println("Projects List:");
-			System.out.println(table.getProjects());
-			
+			//System.out.println("Projects List:");
+			//System.out.println(table.getProjects());
+			/*
 			helperMethods help = new helperMethods();
 			// Cooling rate
 			double temp = 10000;

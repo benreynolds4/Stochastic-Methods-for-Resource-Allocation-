@@ -6,9 +6,9 @@ public class TestClass {
 		public static void main(String[] args) throws IOException{
 			PreferenceTable table = new PreferenceTable("tabfile.txt");
 			table.setupStudents();
-			System.out.println(table.getAllStudentEntries());
+			//System.out.println(table.getAllStudentEntries());
 			
-			// Test Loki Laufeyson
+			/*// Test Loki Laufeyson
 			System.out.println("\n");
 			StudentEntry student = table.getEntryFor("Loki Laufeyson");
 			System.out.println(student.getStudentName());
@@ -43,7 +43,7 @@ public class TestClass {
 			System.out.println("\nBridget Jones Has Preference: Recommending Movies Using Curated IMDb Lists?");
 			System.out.println(student.hasPreference("Recommending Movies Using Curated IMDb Lists"));
 			
-			// Test Add Preferences:
+			 Test Add Preferences:
 			
 			System.out.println("\n\nWEEK 4 TESTS Prints Amount of Projects Students have before and afteer filling all: ------------------\n");
 			Collection<StudentEntry> students = table.getAllStudentEntries().values();
@@ -57,25 +57,30 @@ public class TestClass {
 			students = table.getAllStudentEntries().values();
 			for(StudentEntry stu : students) {
 				System.out.println(stu.getOrderedPreferences().size());
-			}
+			} */
 			
 			
 		
 			System.out.println("\n\nWEEK 5 TESTS Prints Student and there random Assignment: ------------------\n");
+			table.fillPreferencesOfAll(10);
 			CandidateSolution cs = new CandidateSolution(table);
 			cs.printSolution();
+			System.out.println(cs.getEnergy());
+			
+			//CandidateSolution cs2 = new CandidateSolution(table);
+			//cs2.printSolution();
 	
-			CandidateSolution best = new CandidateSolution(table);
+			/*CandidateSolution best = new CandidateSolution(table);
 			for(int i =0; i<500; i++) {
 				CandidateSolution newSolution = new CandidateSolution(table);
 				if (newSolution.getEnergy() < best.getEnergy() ) {
 					best = newSolution;
 				}
-			}
+			} */
 			
-			System.out.println(best.getEnergy());
-			System.out.println(best.getFitness());
-			best.printPreferences();
+			//System.out.println(best.getEnergy());
+			//System.out.println(best.getFitness());
+			//best.printPreferences();
 			
 			
 			
@@ -100,7 +105,7 @@ public class TestClass {
 		        }
 	        	System.out.println("The best solution is: " + currentSolution) ;
 		        System.out.println("Best Fitness: " + currentFitness);
-	        } */
+	        } 
 			
 			System.out.println("Projects List:");
 			System.out.println(table.getProjects());
@@ -137,7 +142,7 @@ public class TestClass {
 	        }
 
 	        System.out.println("Final solution Energy: " + bestEnergy);
-			
+			*/
 			
 			
 			

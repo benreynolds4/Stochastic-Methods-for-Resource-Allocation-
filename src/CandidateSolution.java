@@ -65,6 +65,36 @@ public class CandidateSolution {
 		return totalEnergy;
 	}
 	
+	public void removeCollisons(){
+		Collection<CandidateAssignment> candidateAssign = new ArrayList<CandidateAssignment>();
+		ArrayList<String> check = new ArrayList<String>() ; 
+		candidateAssign = assignments.values(); 
+		int i = 0 ; 
+		for (CandidateAssignment x : candidateAssign){
+			
+			if(check.contains(x.getAssignedProject())){
+				System.out.println("1. " + x.getAssignedProject());
+				x.randomizeAssignment() ; 
+				System.out.println("2. "+ x.getAssignedProject());
+				if(!check.contains(x.getAssignedProject())){
+					i-- ; 
+				}
+				/*else if(check.contains(x.getAssignedProject())){
+					removeCollisons() ;
+				}*/
+				
+				i++ ; 
+			}
+			
+			check.add(x.getAssignedProject()); 
+			
+			//System.out.println(x.getAssignedProject()); 
+		}
+		System.out.println(i); 
+	}
+		
+		
+	
 	public int getPenalties() {
 		Hashtable<String, String> assignedProjects = new Hashtable<String, String>();
 	    Enumeration<CandidateAssignment> e = assignments.elements();
@@ -82,7 +112,7 @@ public class CandidateSolution {
 
 	
 	public void printPreferences() {
-		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth;
+		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth ;
 	    first = second  = third = fourth = fifth = sixth = seventh = eighth = ninth = tenth =0;
 		
 		Enumeration<CandidateAssignment> e = assignments.elements();

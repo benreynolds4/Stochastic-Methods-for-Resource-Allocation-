@@ -2,7 +2,7 @@ public class CandidateAssignment {
 	private StudentEntry student;
 	private String assignment = "";
 	private String previousAssignment;
-	Projects projects;
+	private Projects projects;
 	
 	public CandidateAssignment(StudentEntry entry, Projects projectIn) {
 		student = entry;
@@ -26,9 +26,6 @@ public class CandidateAssignment {
 		int count = 0;
 		previousAssignment = assignment;
 		String rand = "";
-		//System.out.println(projects.getProjects());
-		//System.out.println("Remaining PreProjects:" + projects.getPreassignedProjects().size() );
-		//System.out.println("Remaining Projects:" + (projects.getProjects().size()));
 		while(true){
 			count++;
 			rand = student.getRandomPreference();
@@ -41,7 +38,7 @@ public class CandidateAssignment {
 				projects.removePreassignedProject(rand);
 				break;
 			} else if (count == 100){
-				System.out.println(projects.getRandomProject());
+				assignment = projects.getRandomProject();
 				projects.removeProject(assignment);
 				break;
 			}

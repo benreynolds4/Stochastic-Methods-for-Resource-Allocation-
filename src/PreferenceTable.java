@@ -103,12 +103,12 @@ public class PreferenceTable {
 	}
 	
 	public ArrayList<String> getProjects(){
-		System.out.println("Projects size:" + projects.size());
+		//System.out.println("TABLE Projects size:" + projects.size());
 		return projects;
 	}
 	
 	public ArrayList<String> getPreassignedProjects(){
-		System.out.println("Preassigned Size:" +preassignedProjects.size());
+		//System.out.println("TABLE Preassigned Size:" +preassignedProjects.size());
 		return preassignedProjects;
 	}
 	
@@ -135,7 +135,9 @@ public class PreferenceTable {
 						}
 					}
 				} else if(lineVector.elementAt(1).equals("Yes")) {
-					preassignedProjects.add(lineVector.elementAt(2));
+					if(!(preassignedProjects.contains(lineVector.elementAt(2)))) {
+						preassignedProjects.add(lineVector.elementAt(2));
+					}
 				}
 				allData.add(lineVector);
 			}

@@ -8,13 +8,7 @@ public class Projects {
 	
 	public Projects(ArrayList<String> projectList, ArrayList<String> preassignedProjectList) {
 		projects = projectList;
-		System.out.println(projects.size());
 		preassignedProjects = preassignedProjectList;
-		System.out.println(preassignedProjects.size());
-	}
-	
-	public void removeProject(String project) {
-		projects.remove(project);
 	}
 	
 	public void addProjects(String project){
@@ -27,6 +21,10 @@ public class Projects {
 	
 	public ArrayList<String> getPreassignedProjects() {
 		return preassignedProjects;
+	}
+	
+	public void removeProject(String project) {
+		projects.remove(project);
 	}
 	
 	public void removePreassignedProject(String project) {

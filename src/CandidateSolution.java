@@ -10,8 +10,11 @@ public class CandidateSolution {
 	public CandidateSolution(PreferenceTable prefs) {
 		table = prefs;
 		projects = new Projects(table.getProjects(), table.getPreassignedProjects());
-		
 		createCandidateAssignments();
+	}
+	
+	public ArrayList<String> getProjects(){
+		return projects.getProjects();
 	}
 	
 	private void createCandidateAssignments() {

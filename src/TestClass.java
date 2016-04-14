@@ -58,19 +58,16 @@ public class TestClass {
 			for(StudentEntry stu : students) {
 				System.out.println(stu.getOrderedPreferences().size());
 			} */
-			
-			
 		
-			System.out.println("\n\nWEEK 5 TESTS Prints Student and there random Assignment: ------------------\n");
+		
+			/*System.out.println("\n\nWEEK 5 TESTS Prints Student and there random Assignment: ------------------\n");
 			table.fillPreferencesOfAll(10);
 			CandidateSolution cs = new CandidateSolution(table);
-			cs.printSolution();
-			System.out.println(cs.getEnergy());
+			System.out.println(cs.getEnergy()); */
 			
-			//CandidateSolution cs2 = new CandidateSolution(table);
-			//cs2.printSolution();
+			
 	
-			/*CandidateSolution best = new CandidateSolution(table);
+			/* CandidateSolution best = new CandidateSolution(table);
 			for(int i =0; i<500; i++) {
 				CandidateSolution newSolution = new CandidateSolution(table);
 				if (newSolution.getEnergy() < best.getEnergy() ) {
@@ -108,27 +105,37 @@ public class TestClass {
 	        } 
 			
 			System.out.println("Projects List:");
-			System.out.println(table.getProjects());
+			System.out.println(table.getProjects()); */
+			
+		
+			
+			
 			
 			helperMethods help = new helperMethods();
 			// Cooling rate
 			double temp = 10000;
-	        double coolingRate = 0.00003;
-	        CandidateSolution currentSolution = new CandidateSolution(table); // Initialize intial solution
-	        System.out.println("Initial solution distance: " + currentSolution.getEnergy());
+	        double coolingRate = 0.0003;
+	        table = new PreferenceTable("tabfile.txt");
+			table.setupStudents();
+			CandidateSolution currentSolution = new CandidateSolution(table);
+	        System.out.println("Initial solution: " + currentSolution.getEnergy());
 	        int  bestEnergy = currentSolution.getEnergy();// Set as current best
 	        
 	        // Loop until system has cooled
 	        while (temp > 1) {
 	            // Create new neighbour tour
+	        	table = new PreferenceTable("tabfile.txt");
+				table.setupStudents();
 	        	CandidateSolution newSolution = new CandidateSolution(table);
 	            
 	            // Get energy of solutions
 	            int currentEnergy = currentSolution.getEnergy();
 	            int neighbourEnergy = newSolution.getEnergy();
+	            
 
 	            // Decide if we should accept the neighbour
 	            if (help.acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
+	            	
 	            	currentSolution = newSolution;
 	            }
 
@@ -137,12 +144,13 @@ public class TestClass {
 	                bestEnergy = currentSolution.getEnergy();
 	            }
 	            // Cool system
-	            
+	            //System.out.println(temp);
 	            temp *= 1-coolingRate;
 	        }
 
 	        System.out.println("Final solution Energy: " + bestEnergy);
-			*/
+	        currentSolution.printSolution();
+			
 			
 			
 			

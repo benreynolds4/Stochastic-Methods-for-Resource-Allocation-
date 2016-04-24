@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Hashtable;
 
 public class TestClass {	
 		public static void main(String[] args) throws IOException{
@@ -45,12 +43,6 @@ public class TestClass {
 	        }
 
 	        System.out.println("Final solution Energy: " + bestEnergy);
-	        currentSolution.printSolution();
-			
-			
-			
-			
-			
+	        //currentSolution.printSolution();
 		}
 	}
-

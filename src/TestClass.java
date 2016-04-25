@@ -21,6 +21,7 @@ public class TestClass {
 	        	table = new PreferenceTable("tabfile.txt");
 				table.setupStudents();
 	        	CandidateSolution newSolution = new CandidateSolution(table);
+	        	newSolution.makeChange();
 	            
 	            // Get energy of solutions
 	            int currentEnergy = currentSolution.getEnergy();
@@ -29,7 +30,6 @@ public class TestClass {
 
 	            // Decide if we should accept the neighbour
 	            if (help.acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
-	            	
 	            	currentSolution = newSolution;
 	            }
 
@@ -43,6 +43,7 @@ public class TestClass {
 	        }
 
 	        System.out.println("Final solution Energy: " + bestEnergy);
-	        //currentSolution.printSolution();
+	        currentSolution.printSolution();
+	        currentSolution.printPreferences();
 		}
 	}

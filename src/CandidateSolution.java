@@ -43,7 +43,7 @@ public class CandidateSolution {
 		    StudentEntry key = enumKey.nextElement();
 		    CandidateAssignment val = assignments.get(key);
 		    System.out.println("Student: " + key.getStudentName());
-		    System.out.println("Assignemt: " + val.getAssignedProject() + "\n");
+		    System.out.println("Assigment: " + val.getAssignedProject() + "\n");
 		}
 	}
 	
@@ -63,6 +63,17 @@ public class CandidateSolution {
 	    int totalPenalties = getPenalties();
 	    totalEnergy += totalPenalties;
 		return totalEnergy;
+	}
+	
+	public void makeChange() {
+		CandidateAssignment randomAssignment;
+		randomAssignment = getRandomAssignment();
+		//System.out.println(randomAssignment.getAssignedProject() + " " + randomAssignment.getAssignmentRank());
+		randomAssignment.randomChange();
+		//System.out.println(randomAssignment.getAssignedProject() + " " + randomAssignment.getAssignmentRank());
+		StudentEntry entry = randomAssignment.getStudentEntry();
+		assignments.remove(entry);
+		assignments.put(entry, randomAssignment);
 	}
 	
 	public void removeCollisons(){
@@ -112,26 +123,29 @@ public class CandidateSolution {
 
 	
 	public void printPreferences() {
-		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth ;
-	    first = second  = third = fourth = fifth = sixth = seventh = eighth = ninth = tenth =0;
+		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, other,total ;
+	    first = second  = third = fourth = fifth = sixth = seventh = eighth = ninth = tenth = other =total   =0;
 		
 		Enumeration<CandidateAssignment> e = assignments.elements();
 		while(e.hasMoreElements()) {
 			CandidateAssignment current = e.nextElement();
 			switch(current.getAssignmentRank()){
-			    case 0: first++; break;
-			    case 1: second++; break;
-			    case 2: third++; break;
-			    case 3: fourth++; break;
-			    case 4: fifth++; break;
-			    case 5: sixth++; break;
-			    case 6: seventh++; break;
-			    case 7: eighth++; break;
-			    case 8: ninth++; break;
-			    case 9: tenth++; break;   
+			    case 0: first++; total++; break;
+			    case 1: second++; total++; break;
+			    case 2: third++;total++;  break;
+			    case 3: fourth++; total++; break;
+			    case 4: fifth++; total++; break;
+			    case 5: sixth++; total++; break;
+			    case 6: seventh++; total++; break;
+			    case 7: eighth++; total++; break;
+			    case 8: ninth++; total++; break;
+			    case 9: tenth++; total++; break;  
+			    default:other++;total++;  break;
+			    	
 			}
 		}
-		System.out.println("first Preferences awarded: " + first + "\nSecond Preferences awarded: " + second + "\nThird Preferences awarded: " + third + "\nFourth Preferences awarded: " + fourth + "\nFifth Preferences awarded: " + fifth + "\nSixth Preferences awarded: " + sixth + "\nSeventh Preferences awarded: " + seventh + "\nEight Preferences awarded: " + eighth + "\nNinth Preferences awarded: " + ninth + "\nTenth Preferences awarded: " + tenth);
+		System.out.println("first Preferences awarded: " + first + "\nSecond Preferences awarded: " + second + "\nThird Preferences awarded: " + third + "\nFourth Preferences awarded: " + fourth + "\nFifth Preferences awarded: " + fifth + "\nSixth Preferences awarded: " + sixth + "\nSeventh Preferences awarded: " + seventh + "\nEight Preferences awarded: " + eighth + "\nNinth Preferences awarded: " + ninth + "\nTenth Preferences awarded: " + tenth + "\nOther  Preferences awarded: " + other);
+		System.out.print("Total: "+total);
 	}
 	
 

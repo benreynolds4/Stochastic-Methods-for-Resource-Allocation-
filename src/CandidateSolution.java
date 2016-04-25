@@ -68,9 +68,7 @@ public class CandidateSolution {
 	public void makeChange() {
 		CandidateAssignment randomAssignment;
 		randomAssignment = getRandomAssignment();
-		//System.out.println(randomAssignment.getAssignedProject() + " " + randomAssignment.getAssignmentRank());
 		randomAssignment.randomChange();
-		//System.out.println(randomAssignment.getAssignedProject() + " " + randomAssignment.getAssignmentRank());
 		StudentEntry entry = randomAssignment.getStudentEntry();
 		assignments.remove(entry);
 		assignments.put(entry, randomAssignment);

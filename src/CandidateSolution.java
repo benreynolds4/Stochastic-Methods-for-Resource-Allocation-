@@ -146,5 +146,47 @@ public class CandidateSolution {
 		System.out.print("Total: "+total);
 	}
 	
+	
+	
+	/* 						*
+	 * 						*
+	 *  Genetic Algo Code:	*
+	 * 						*
+	 *  					*/
+	 static int defaultGeneLength = 64;
+	    private byte[] genes = new byte[defaultGeneLength];
+	    // Cache
+
+	    // Create a random individual
+	    public void generateIndividual() {
+	        for (int i = 0; i < size(); i++) {
+	            byte gene = (byte) Math.round(Math.random());
+	            genes[i] = gene;
+	        }
+	    }
+
+	    /* Getters and setters */
+	    public byte getGene(int index) {
+	        return genes[index];
+	    }
+
+	    public void setGene(int index, byte value) {
+	        genes[index] = value;
+	    }
+
+	    /* Public methods */
+	    public int size() {
+	        return genes.length;
+	    }
+
+	    @Override
+	    public String toString() {
+	        String geneString = "";
+	        for (int i = 0; i < size(); i++) {
+	            geneString += getGene(i);
+	        }
+	        return geneString;
+	    }
+	
 
 }

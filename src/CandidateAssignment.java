@@ -74,8 +74,8 @@ public class CandidateAssignment {
 	public int getEnergy() {
 		int ranking = student.getRanking(assignment);
 		if(ranking == -1) {
-			ranking = 15;
-		}
+			ranking = 11;
+		} 
 		int energy = (ranking + 1) * (ranking+1);
 		return energy;
 	}

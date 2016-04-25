@@ -7,7 +7,7 @@ public class TestClass {
 	
 			helperMethods help = new helperMethods();
 			// Cooling rate
-			double temp = 10000;
+			double temp = 100000;
 	        double coolingRate = 0.0003;
 	        table = new PreferenceTable("tabfile.txt");
 			table.setupStudents();
@@ -38,7 +38,7 @@ public class TestClass {
 	            if (currentSolution.getEnergy() < bestEnergy) {
 	            	bestSolution = currentSolution;
 	                bestEnergy = currentSolution.getEnergy();
-	            }
+	            } 
 	            // Cool system
 	            //System.out.println(temp);
 	            temp *= 1-coolingRate;

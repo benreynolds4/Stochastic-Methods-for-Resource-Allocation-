@@ -148,9 +148,9 @@ public class CandidateSolution {
 	
 	
 	
-	/* 						*
-	 * 						*
-	 *  Genetic Algo Code:	*
+	/* 
+	 * 
+	 * Genetic Algo Code:	*
 	 * 						*
 	 *  					*/
 	 static int defaultGeneLength = 64;

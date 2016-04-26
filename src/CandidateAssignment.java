@@ -41,7 +41,7 @@ public class CandidateAssignment {
 				projects.removeProject(assignment);
 				break;
 			}
-		}
+		} 
 	}
 	
 	public void randomizeAssignment() throws NullPointerException {
@@ -68,7 +68,7 @@ public class CandidateAssignment {
 			else if(projects.getProjects().size() == 0){
 				break;
 			}
-		}
+		} 
 	}
 	
 	public int getEnergy() {

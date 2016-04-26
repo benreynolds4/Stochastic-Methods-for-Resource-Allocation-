@@ -70,7 +70,6 @@ public class CandidateSolution {
 		randomAssignment = getRandomAssignment();
 		randomAssignment.randomChange();
 		StudentEntry entry = randomAssignment.getStudentEntry();
-		assignments.remove(entry);
 		assignments.put(entry, randomAssignment);
 	}
 	

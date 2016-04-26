@@ -12,6 +12,10 @@ public class Projects {
 	}
 	
 	public void addProjects(String project){
+		preassignedProjects.add(project);
+	}
+	
+	public void addPreProjects(String project){
 		projects.add(project);
 	}
 	

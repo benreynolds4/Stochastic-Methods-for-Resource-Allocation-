@@ -32,6 +32,8 @@ public class CandidateSolution {
 		return assignments.get(student);
 	}
 	
+
+	
 	public CandidateAssignment getRandomAssignment() {
 		return getAssignmentFor(table.getRandomStudent());
 	}
@@ -169,8 +171,8 @@ public class CandidateSolution {
 	        return genes[index];
 	    }
 
-	    public void setGene(int index, byte value) {
-	        genes[index] = value;
+	    public void setAssignment(StudentEntry s, CandidateAssignment value) {
+	    	assignments.put(s, value);	    
 	    }
 
 	    /* Public methods */

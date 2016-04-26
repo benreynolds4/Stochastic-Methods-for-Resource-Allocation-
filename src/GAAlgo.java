@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class GAAlgo {
 
@@ -13,7 +15,8 @@ public class GAAlgo {
     // Evolve a population
     public static GAPopn evolvePopulation(GAPopn pop) throws IOException {
     	table = new PreferenceTable("tabfile.txt");
-        GAPopn newPopulation = new GAPopn(table, pop.popSize(), false);
+    	table.setupStudents();
+        GAPopn newPopulation = new GAPopn(table, pop.popSize(), true);
 
         // Keep our best individual
         if (elitism) {
@@ -30,6 +33,8 @@ public class GAAlgo {
         // Loop over the population size and create new individuals with
         // crossover
         for (int i = elitismOffset; i < pop.popSize(); i++) {
+        	table = new PreferenceTable("tabfile.txt");
+        	table.setupStudents();
             CandidateSolution indiv1 = tournamentSelection(pop);
             CandidateSolution indiv2 = tournamentSelection(pop);
             CandidateSolution newIndiv = crossover(indiv1, indiv2);
@@ -38,41 +43,73 @@ public class GAAlgo {
 
         // Mutate population
         for (int i = elitismOffset; i < newPopulation.popSize(); i++) {
-            mutate(newPopulation.getSolution(i));
+           // mutate(newPopulation.getSolution(i));
         }
 
         return newPopulation;
     }
 
     // Crossover individuals
-    private static CandidateSolution crossover(CandidateSolution indiv1, CandidateSolution indiv2) {
+    private static CandidateSolution crossover(CandidateSolution indiv1, CandidateSolution indiv2)throws NullPointerException 
+    {
+    	
     	CandidateSolution newSol = new CandidateSolution(table);
         // Loop through genes
-        for (int i = 0; i < indiv1.size(); i++) {
-            // Crossover
-            if (Math.random() <= uniformRate) {
-                newSol.setGene(i, indiv1.getGene(i));
-            } else {
-                newSol.setGene(i, indiv2.getGene(i));
-            }
-        }
+    	Hashtable<String, StudentEntry> studentEntries = table.getAllStudentEntries();
+	    Enumeration<StudentEntry> e = studentEntries.elements();
+	    StudentEntry entry; 
+	    while(e.hasMoreElements()) {
+	    	entry = e.nextElement();
+	    	//System.out.println(entry.getStudentName());
+	    	//System.out.println(indiv1.getAssignmentFor(entry));   ERROR HERE
+	    	if((indiv1.getAssignmentFor(entry) != null) && (indiv2.getAssignmentFor(entry) != null)){						// ERROR HERE
+	    		if (Math.random() <= uniformRate) {
+	                newSol.setAssignment(entry, indiv1.getAssignmentFor(entry));
+	            } else {
+	                newSol.setAssignment(entry, indiv2.getAssignmentFor(entry));
+	            }
+	    	}
+	    } 
+	    
         return newSol;
     }
 
     // Mutate an individual
-    private static void mutate(CandidateSolution indiv) {
-        // Loop through genes
-        for (int i = 0; i < indiv.size(); i++) {
-            if (Math.random() <= mutationRate) {
-                // Create random gene
-                byte gene = (byte) Math.round(Math.random());
-                indiv.setGene(i, gene);
-            }
-        }
+   
+    
+    public static CandidateSolution swapEach(CandidateSolution a, CandidateSolution b) throws NullPointerException, IOException{
+    	PreferenceTable tab = new PreferenceTable("tabfile.txt");
+    	tab.setupStudents();
+    	System.out.println(tab.getAllStudentEntries());
+    	Hashtable<String, StudentEntry> studentEntries = tab.getAllStudentEntries();
+	    Enumeration<StudentEntry> e = studentEntries.elements();
+	    StudentEntry entry; 
+	    CandidateAssignment assignmentOne;
+	    CandidateAssignment assignmentTwo;
+	    PreferenceTable tab2 = new PreferenceTable("tabfile.txt");
+    	tab2.setupStudents();
+	    CandidateSolution c= new CandidateSolution(tab2);
+	    while(e.hasMoreElements()) {
+	    	entry = e.nextElement();
+	    	assignmentOne =a.getAssignmentFor(entry);
+	    	assignmentTwo = b.getAssignmentFor(entry);
+	    	if(assignmentOne.getAssignmentRank() < assignmentTwo.getAssignmentRank()) {
+	    		c.setAssignment(entry, assignmentOne);
+	    	} else {
+	    		c.setAssignment(entry, assignmentTwo);
+	    	}
+	    }
+	    
+	    if(a.getEnergy() > c.getEnergy()) {
+	    	return c;
+	    } else {
+	    	return a;
+	    }
+
     }
 
     // Select individuals for crossover
-    private static CandidateSolution tournamentSelection(GAPopn pop) {
+    private static CandidateSolution tournamentSelection(GAPopn pop) throws IOException {
         // Create a tournament population
         GAPopn tournament = new GAPopn(table, tournamentSize, false);
         // For each place in the tournament get a random individual

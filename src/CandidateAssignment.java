@@ -22,6 +22,11 @@ public class CandidateAssignment {
 		return assignment;
 	}
 	
+	public void setAssignment(String change){
+		previousAssignment = assignment ; 
+		assignment = change ; 
+	}
+	
 	public void randomChange() {
 		projects.addProjects(assignment);
 		assignment = student.getRandomPreference();

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 //GA Population
@@ -6,8 +7,9 @@ public class GAPopn {
 	private CandidateSolution[] population;
 	PreferenceTable preftable;
 	int size = 0;
-	public GAPopn(PreferenceTable table, int inSize, boolean initialise) {
+	public GAPopn(PreferenceTable table, int inSize, boolean initialise) throws IOException {
 		preftable = table;
+		preftable.setupStudents();
 		size = inSize;
 		population = new CandidateSolution[size];
 		if (initialise){
@@ -19,6 +21,7 @@ public class GAPopn {
 		}
 	}
 	
+	
 	public void saveSolution(int index, CandidateSolution sol) {
         population[index] = sol;
     }
@@ -28,7 +31,6 @@ public class GAPopn {
     }
 	
 	public CandidateSolution getFittest() {
-		CandidateSolution sol = new CandidateSolution(preftable);
 		CandidateSolution best = new CandidateSolution(preftable); 
 		for (int i = 0; i < popSize(); i++) {
 			if(population[i].getEnergy() < best.getEnergy()) {

@@ -1,5 +1,6 @@
 import java.util.Enumeration;
 import java.util.Hashtable;
+//GA Population
 
 public class GAPopn {
 	private CandidateSolution[] population;
